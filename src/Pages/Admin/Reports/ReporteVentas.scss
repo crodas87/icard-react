@@ -1,0 +1,77 @@
+
+.react-datepicker__input-container {
+    position: relative;
+    width: 210px !important;
+}
+
+.reporte-ventas-container {
+  padding: 20px;
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  .date-range-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    h3 {
+      margin-right: 10px;
+    }
+    
+    .react-datepicker-wrapper {
+      margin-right: 10px;
+    }
+  }
+  
+  .payment-type-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    h3 {
+      margin-right: 10px;
+    }
+    
+    .dropdown {
+      margin-right: 10px;
+    }
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+    
+    button {
+      margin-right: 10px;
+    }
+  }
+  
+  .total-venta-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    .icon {
+      margin-right: 10px;
+    }
+  }
+  
+  .table-container {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      
+      th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+      
+      th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.tables-list-admin {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+
+
+    .label-order-state{
+      margin: 0;
+      top: 30px;
+      right: 70px;
+   
+    }
+  
+    &__reload {
+      margin: 0;
+      position: absolute;
+      top: 45px;
+      right: 70px;
+    }
+  
+    &__reload-toggle {
+      position: absolute !important;
+      top: 55px;
+      right: 150px;
+      display: flex;
+      align-items: center;
+  
+      span {
+        margin-right: 20px;
+      }
+    }
+ 
+  }

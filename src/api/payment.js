@@ -54,7 +54,8 @@ export async function closePaymentApi(idPayment) {
         statusPayment: PAYMENT_STATUS.PAID,
       }),
     };
-    await fetch(url, params);
+    const result =await fetch(url, params);
+    return result;
   } catch (error) {
     throw error;
   }

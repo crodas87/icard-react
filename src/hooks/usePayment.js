@@ -29,7 +29,7 @@ export function usePayment() {
 
   const closePayment = async (idPayment) => {
     try {
-      await closePaymentApi(idPayment);
+      return await closePaymentApi(idPayment);
     } catch (error) {
       setError(error);
     }

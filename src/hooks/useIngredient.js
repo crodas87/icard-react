@@ -6,6 +6,7 @@ import {
   deleteIngredientApi,
   getIngredientByIdApi,
   getIngredientsByCategoryApi,
+  updateIngredientStockApi
 } from "../api/ingredient";
 import { useAuth } from "./";
 
@@ -44,6 +45,17 @@ export function useIngredient() {
       setLoading(true);
       await updateIngredientApi(id, data, auth.token);
       setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
+  const updateIngredientStock = async (id) => {
+    try {
+      setLoading(true);
+      const result =await updateIngredientStockApi(id, auth.token);
+      setLoading(false);
+      return result;
     } catch (error) {
       setError(error);
       setLoading(false);
@@ -89,6 +101,7 @@ export function useIngredient() {
     getIngredients,
     addIngredient,
     updateIngredient,
+    updateIngredientStock,
     deleteIngredient,
     getIngredientById,
     getIngredientByCategory,

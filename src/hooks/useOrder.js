@@ -54,14 +54,14 @@ export function useOrder() {
   };
   const addPaymentToOrder = async (idOrder, idPayment) => {
     try {
-      await addPaymentToOrderApi(idOrder, idPayment);
+      return await addPaymentToOrderApi(idOrder, idPayment);
     } catch (error) {
       setError(error);
     }
   };
   const closeOrder = async (idOrder) => {
     try {
-      await closeOrderApi(idOrder);
+      return await closeOrderApi(idOrder);
     } catch (error) {
       setError(error);
     }

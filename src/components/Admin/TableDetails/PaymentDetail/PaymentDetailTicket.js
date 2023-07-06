@@ -1,38 +1,62 @@
 import React from 'react';
 import { Header, Button } from 'semantic-ui-react';
 import logo from "../../../../assets/logo.png";
-import { usePayment, useOrder } from "../../../../hooks";
+import { usePayment, useOrder, useIngredient } from "../../../../hooks";
 import {LOCAL_API} from '../../../../utils/constants'
 import { size } from "lodash";
 import moment from 'moment';
 import 'moment/locale/es';
 import  './paymetDetailTicket.scss';
 export function PaymentDetailTicket(props) {
-    const {products,payment,openCloseModal,onReloadOrders} = props;
+    const {orders,payment,openCloseModal,onReloadOrders} = props;
 
-    if(size(products)==0){
+    if(size(orders)==0){
        onReloadOrders();   
     }
-    const total = products.reduce((acc, product) => acc + parseInt(product.product_data.price)*parseInt(product.quantity), 0);
+    const total = orders.reduce((acc, product) => acc + parseInt(product.product_data.price)*parseInt(product.quantity), 0);
     const date = moment().locale('es').format('D [de] MMMM [de] YYYY [a las] h:mm a');
     const {closePayment}=usePayment();
-    const {closeOrder,getOrdersByTable}=useOrder();
+    const {closeOrder}=useOrder();
+    const {updateIngredientStock,error} = useIngredient();
 
+    console.log('orders ',orders);
     const onCloseTable = async () => {
-          try {
-                  await closePayment(payment.id);
-                  for await (const order of products) {
-                    await closeOrder(order.id);
+      try {
+        const pay = await closePayment(payment.id);
+        console.log("PAY ", pay);
+        if (pay.status == 200) {
+          const closePromises = orders.map(async (order) => {
+            try {
+              const close = await closeOrder(order.id);
+              if (close.status == 200) {
+                try {
+                  const result =await updateIngredientStock(order.id);
+                  if(result.error){
+                    window.alert(result.error);
                   }
-                  openCloseModal();
-                  onReloadOrders(); 
-                  window.print();
-                  redirectPage();
-                  //window.location.reload();           
-          } catch (error) {
-            throw error;
-          }
+                  
+                } catch (error) {
+                  console.error("Error al descontar el stock de la orden:",order.id," Error:", error);
+                }
+               
+              }
+            } catch (error) {
+              console.error("Error al cerrar orden:", error);
+              // Puedes agregar lógica adicional en caso de error
+            }
+          });
+          await Promise.all(closePromises);
+        }
+        openCloseModal();
+        onReloadOrders();
+        window.print();
+        redirectPage();
+        // window.location.reload();
+      } catch (error) {
+        throw error;
+      }
     };
+    
 
   return (
     
@@ -47,7 +71,7 @@ export function PaymentDetailTicket(props) {
         <p className="ticket-contact-item">moodparadorliza@gmail.com</p>
       </div>
       <div className="ticket-body">
-        <div className="ticket-table-number">Pedido Nro. {products[0].table_data.number}</div>
+        <div className="ticket-table-number">Pedido Nro. {orders[0].table_data.number}</div>
         <table className="ticket-products">
           <thead>
             <tr>
@@ -58,7 +82,7 @@ export function PaymentDetailTicket(props) {
             </tr>
           </thead>
           <tbody>
-          {products.map(product => (
+          {orders.map(product => (
               <tr key={product.id}>
                 <td>{product.quantity}</td>
                 <td>{product.product_data.title}</td>

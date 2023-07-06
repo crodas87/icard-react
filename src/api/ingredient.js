@@ -80,6 +80,27 @@ export async function addIngredientApi(data, token) {
       throw error;
     }
   }
+  export async function updateIngredientStockApi(id, token) {
+    try {
+      const formData = new FormData();
+      formData.append("idOrder", id);
+      
+      const url = `${BASE_API}/api/ingredients/update_stock`;
+      const params = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      };
+  
+      const response = await fetch(url, params);
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   export async function deleteIngredientApi(id, token) {
     try {

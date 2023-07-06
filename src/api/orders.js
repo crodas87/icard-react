@@ -120,7 +120,7 @@ export async function addPaymentToOrderApi(idOrder, idPayment) {
       }),
     };
    const result= await fetch(url, params);
-
+    return result;
   } catch (error) {
     throw error;
   }
@@ -138,7 +138,8 @@ export async function closeOrderApi(idOrder) {
         close: true,
       }),
     };
-    await fetch(url, params);
+   const result =  await fetch(url, params);
+   return result;
   } catch (error) {
     throw error;
   }

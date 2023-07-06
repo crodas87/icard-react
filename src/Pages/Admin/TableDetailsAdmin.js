@@ -44,7 +44,7 @@ export function TableDetailsAdmin() {
   const oncreatePayments = async()=> {
 
     if(size(orders)>0){
-    const result=confirm('Estas seguro que deseas pasarle la cuenta?');
+    const result=confirm('Estas seguro que deseas pedir la cuenta?');
     if (result){
       let totalPayment = 0;
       forEach(orders,(order)=>{
@@ -62,7 +62,7 @@ export function TableDetailsAdmin() {
             if(payment!=undefined){
                 for await(const order of orders){
                     const val = await addPaymentToOrder(order.id, payment.id)
-      
+                    
                   }
           }
 
@@ -104,7 +104,7 @@ export function TableDetailsAdmin() {
                  
                  <PaymentDetailTicket 
                  payment={paymentData}
-                 products={orders}
+                 orders={orders}
                  openCloseModal={openCloseModal}
                  onReloadOrders={onReloadOrders}
                />

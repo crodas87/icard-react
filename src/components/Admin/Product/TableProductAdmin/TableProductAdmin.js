@@ -28,7 +28,6 @@ export function TableProductAdmin(props) {
         <Table.Row>
           <Table.HeaderCell>Imagen</Table.HeaderCell>
           <Table.HeaderCell>Producto</Table.HeaderCell>
-          <Table.HeaderCell>Stock</Table.HeaderCell>
           <Table.HeaderCell>CodBarra</Table.HeaderCell>
           <Table.HeaderCell>Precio</Table.HeaderCell>
           <Table.HeaderCell>Categoria</Table.HeaderCell>
@@ -44,7 +43,6 @@ export function TableProductAdmin(props) {
               <Image src={product.image} />
             </Table.Cell>
             <Table.Cell>{product.title}</Table.Cell>
-            <Table.Cell>{product.stock}</Table.Cell>
             <Table.Cell>{product.codbarra}</Table.Cell>
             <Table.Cell>{FormatoNumerico(product.price)} Gs</Table.Cell>
             <Table.Cell>{product.category_data.title}</Table.Cell>

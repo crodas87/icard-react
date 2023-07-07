@@ -30,7 +30,7 @@ export function AddEditProductForm(props) {
         validationSchema: Yup.object(product ? updateSchema() : newSchema()),
         validateOnChange: false,
         onSubmit: async (formValue) => {
-            console.log('FORMIK VALUE ',formValue);
+          
             if (product) await updateProduct(product.id, formValue);
             else await addProduct(formValue);
 
@@ -100,14 +100,6 @@ export function AddEditProductForm(props) {
                 onChange={formik.handleChange}
              
              />
-            <Form.Input 
-                type="number" 
-                name="stock" 
-                placeholder="Stock"
-                value={formik.values.stock}
-                onChange={formik.handleChange}
-                error={formik.errors.stock}
-             />
 
             <Form.Input 
                 name="codbarra" 
@@ -173,12 +165,11 @@ function formatDropdownData(data) {
 function initialValues(data) {
     return {
       title: data?.title || "",
-      stock: data?.stock || "",
       codbarra: data?.codbarra || "",
       price: data?.price || "",
       category: data?.category || "",
       active: data?.active ? true : false,
-      image: "",
+      image: data?.image || ""
     };
 }
 

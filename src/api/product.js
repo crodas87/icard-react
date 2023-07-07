@@ -28,10 +28,8 @@ export async function getProductsIngredientsApi() {
 export async function addProductApi(data, token) {
     try {
 
-      console.log('TIPO ',data.productType);
       const formData = new FormData();
       formData.append("title", data.title);
-      formData.append("stock", data.stock);
       formData.append("codbarra", data.codbarra);
       formData.append("price", data.price);
       formData.append("category", data.category);
@@ -70,13 +68,13 @@ export async function addProductApi(data, token) {
   export async function updateProductApi(id, data, token) {
     try {
       const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("brand", data.brand);
-      formData.append("code", data.code);
+      formData.append("title", data.title);
+      formData.append("codbarra", data.codbarra);
       formData.append("price", data.price);
       formData.append("category", data.category);
       formData.append("active", data.active);
-      if (data.image) formData.append("image", data.image);
+      formData.append("image", data.image);
+      formData.append("productType", data.productType);
   
       const url = `${BASE_API}/api/products/${id}/`;
       const params = {

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Header, Button } from 'semantic-ui-react';
-import logo from "../../../../assets/logo.png";
 import { usePayment, useOrder, useIngredient } from "../../../../hooks";
-import {LOCAL_API} from '../../../../utils/constants'
+import {LOCAL_API,LOGO} from '../../../../utils/constants'
 import { size } from "lodash";
 import moment from 'moment';
 import 'moment/locale/es';
@@ -62,7 +61,7 @@ export function PaymentDetailTicket(props) {
     
     <div className="ticket">
        <div className="ticket-header">
-        <img src={logo} alt="Parador Liza" className="ticket-logo" />
+        <img src={LOGO} alt="Parador Liza" className="ticket-logo" />
         <h1 className="ticket-title">Parador Liza</h1>
       </div>
       <div className="ticket-contact">

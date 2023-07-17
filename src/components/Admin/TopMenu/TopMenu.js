@@ -9,9 +9,18 @@ export function TopMenu() {
 
   const renderName = () => {
     if (auth.me?.first_name && auth.me?.last_name) {
+      console.log('UNO');
       return `${auth.me.first_name} ${auth.me.last_name}`;
+    }else if (auth.me?.username){
+      console.log('DOS');
+      return auth.me?.username;
+    }else{
+      console.log('TRES');
+      logout();
     }
-    return auth.me?.username;
+      
+    
+    
   };
 
   return (
